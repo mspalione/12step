@@ -11,7 +11,7 @@ const router = require('express').Router()
  * @returns {Error}  default - Unexpected error
  */
 router.get('/', (req, res) => {
-    res.send('wassup')
+    res.send('hi there')
 })
 
 module.exports = router
