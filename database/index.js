@@ -2,8 +2,7 @@ const { Sequelize } = require('sequelize')
 const config = require('../configuration/dbConfig.json')
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './database.sqlite',
-  logging: false
+  storage: './database.sqlite'
   }) 
 
 const db = {
@@ -20,5 +19,9 @@ const db = {
       })
     }
 }
+
+db.models.User = require('../models/user.js')
+db.models.User = require('../models/contact.js')
+db.models.User = require('../models/calendar.js')
 
 module.exports = db
