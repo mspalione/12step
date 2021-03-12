@@ -2,10 +2,16 @@ const { Sequelize, DataTypes } = require('sequelize')
 const sequelize = new Sequelize('sqlite::memory:')
 
 const User = sequelize.define('User', {
-    id: {
+    uuid: {
         type: DataTypes.UUID,
+        unique: true,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true
+    },
+    id: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        autoIncrement: true
     },
     firstName: {
         type: DataTypes.STRING,
@@ -28,3 +34,7 @@ const User = sequelize.define('User', {
         allowNull: false
     }
 })
+
+sequelize.models.User
+
+module.exports = User

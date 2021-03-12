@@ -13,6 +13,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', router)
+app.use('/users', router)
 
 
 database.initialize()

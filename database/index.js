@@ -1,14 +1,25 @@
 const { Sequelize } = require('sequelize')
-const config = require('../configuration/dbConfig.json')
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './database.sqlite'
+  storage: '../database.sqlite'
   }) 
+const queryInterface = sequelize.getQueryInterface()
+const User = require('./models/user.js')
+const Contact = require('./models/contact.js')
+const Calendar = require('./models/calendar.js')
 
 const db = {
     Sequelize,
+    // init() {
+    //   db.sequelize = new Sequelize({
+    //     dialect: 'sqlite',
+    //     storage: 'database.sqlite'
+    //     }),
+    //   db.User = UserModel(db)
+    //   return db.sequelize.sync({ force: false })
+    // }
     sequelize,
-    models: {},
+    models: { User, Contact, Calendar },
     initialize: () => {
       sequelize.sync({ force: false })
       .then(() => {
@@ -20,8 +31,12 @@ const db = {
     }
 }
 
-db.models.User = require('../models/user.js')
-db.models.User = require('../models/contact.js')
-db.models.User = require('../models/calendar.js')
+// queryInterface.createTable('Users', User)
+// queryInterface.createTable('Contacts', Contact)
+// queryInterface.createTable('Calendar', Calendar)
+
+// db.models.User = require('./models/user.js')
+// db.models.Contact = require('./models/contact.js')
+// db.models.Calendar = require('./models/calendar.js')
 
 module.exports = db
