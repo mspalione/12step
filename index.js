@@ -1,8 +1,9 @@
 const express = require('express')
 const router = require('./routes')
+const user = require('./routes/user')
 const database = require('./database')
-
 const app = express()
+
 app.disable('x-powered-by')
 app.use(express.json())
 
@@ -12,8 +13,8 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use('/users', user)
 app.use('/', router)
-app.use('/users', router)
 
 
 database.initialize()

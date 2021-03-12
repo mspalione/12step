@@ -1,18 +1,18 @@
 const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = new Sequelize('sqlite::memory:')
+const db = require('../index')
 
-const User = sequelize.define('User', {
+const User = db.sequelize.define('User', {
     uuid: {
         type: DataTypes.UUID,
         unique: true,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true
     },
-    id: {
-        type: DataTypes.INTEGER,
-        unique: true,
-        autoIncrement: true
-    },
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     unique: true,
+    //     autoIncrement: true
+    // },
     firstName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -35,6 +35,6 @@ const User = sequelize.define('User', {
     }
 })
 
-sequelize.models.User
+db.models.User
 
-module.exports = User
+module.exports = User 

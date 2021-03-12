@@ -1,19 +1,19 @@
 const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = new Sequelize('sqlite::memory:')
+const db = require('../index')
 const User = require('./user.js')
 
-const Contact = sequelize.define('Contact', {
+const Contact = db.sequelize.define('Contact', {
     uuid: {
         type: DataTypes.UUID,
         unique: true,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true
     },
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true
-    },
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     autoIncrement: true
+    // },
     firstName: {
         type: DataTypes.STRING,
         allowNull: false
@@ -42,6 +42,6 @@ const Contact = sequelize.define('Contact', {
 
 Contact.belongsTo(User)
 
-sequelize.models.Contact
+db.models.Contact
 
 module.exports = Contact

@@ -9,9 +9,11 @@ const User = require('../database/models/user.js')
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
- router.get('/users', (req, res) => {
-    const users = User.findAll()
-    return res.json(users)
+ router.get('/', (req, res) => {
+    User.findAll().then((users) => {
+        return res.json(users)
+    })
+    
 })
 
 //get one user
@@ -23,9 +25,10 @@ const User = require('../database/models/user.js')
  * @returns {object} 200 - One user's info
  * @returns {Error}  default - Unexpected error
  */
- router.get('/users/:id', (req, res) => {
-    const users = User.findOne({ where: { id } })
-    return res.json(users)
+ router.get('/:id', (req, res) => {
+    User.findOne({ where: { id } }).then(users => {
+        return res.json(users)
+    })
 })
 
 //create user
@@ -36,20 +39,22 @@ const User = require('../database/models/user.js')
  * @returns {object} 200 - Create new user
  * @returns {Error}  default - Unexpected error
  */
- router.post('/users', (req, res) => {
+ router.post('/', (req, res) => {
     const newUser = User.create({
-        firstName: "Melissa",
-    lastName: "S",
-    recoveryEmail: "recover@email.com",
-    userName: "melS",
-    password: "thisismypassword"
-        // firstName: req.body.firstName,
-        // lastName: req.body.lastName,
-        // recoveryEmail: req.body.recoveryEmail,
-        // userName: req.body.userName,
-        // password: req.body.password
+    //     firstName: "Melissa",
+    // lastName: "S",
+    // recoveryEmail: "recover@email.com",
+    // userName: "melS",
+    // password: "thisismypassword"
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        recoveryEmail: req.body.recoveryEmail,
+        userName: req.body.userName,
+        password: req.body.password
+    }).then((user) => {
+        return res.json( user )
     })
-    return res.json( newUser )
+    
 })
 
 module.exports = router

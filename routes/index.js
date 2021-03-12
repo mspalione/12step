@@ -16,15 +16,28 @@ router.get('/', (req, res) => {
 })
 
 
-//create user
-/**
- * This function comment is parsed by doctrine
- * @route POST /users
- * @group users - Operations about user
- * @returns {object} 200 - Create new user
- * @returns {Error}  default - Unexpected error
- */
- router.post('/users', (req, res) => {
+// //create user
+// /**
+//  * This function comment is parsed by doctrine
+//  * @route POST /users
+//  * @group users - Operations about user
+//  * @returns {object} 200 - Create new user
+//  * @returns {Error}  default - Unexpected error
+//  */
+//  router.post('/users', (req, res) => {
+//     User.sync().then(() => {
+//         return User.create({
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             recoveryEmail: req.body.recoveryEmail,
+//             userName: req.body.userName,
+//             password: req.body.password
+//         })
+//     }).then((user) => {
+//         return res.json( user )
+//     })
+// })
+
     // const newUser = {
     //     firstName: req.body.firstName,
     //     lastName: req.body.lastName,
@@ -32,18 +45,7 @@ router.get('/', (req, res) => {
     //     userName: req.body.userName,
     //     password: req.body.password
     // }
-    User.sync().then(() => {
-        return User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            recoveryEmail: req.body.recoveryEmail,
-            userName: req.body.userName,
-            password: req.body.password
-        })
-    }).then((user) => {
-        return res.json( user )
-    })
-})
+
 
 
 //get all users

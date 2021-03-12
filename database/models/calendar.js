@@ -1,20 +1,20 @@
 const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = new Sequelize('sqlite::memory:')
+const db = require('../index')
 const User = require('./user.js')
 const Contact = require('./contact.js')
 
-const Calendar = sequelize.define('Calendar', {
+const Calendar = db.sequelize.define('Calendar', {
     uuid: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
         unique: true,
         primaryKey: true
     },
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true
-    },
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     autoIncrement: true
+    // },
     eventTitle: {
         type: DataTypes.STRING,
         allowNull: false
@@ -48,6 +48,6 @@ const Calendar = sequelize.define('Calendar', {
 Calendar.belongsTo(User)
 Calendar.belongsTo(Contact)
 
-sequelize.models.Calendar
+db.models.Calendar
 
 module.exports = Calendar
