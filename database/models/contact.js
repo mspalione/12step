@@ -7,7 +7,7 @@ const Contact = db.sequelize.define('Contact', {
         type: DataTypes.UUID,
         unique: true,
         defaultValue: Sequelize.UUIDV4,
-        primaryKey: true
+        //primaryKey: true
     },
     // id: {
     //     type: DataTypes.INTEGER,
@@ -31,13 +31,13 @@ const Contact = db.sequelize.define('Contact', {
     address: {
         type: DataTypes.STRING
     },
-    userId: {
-        type: DataTypes.UUID,
-        references: {
-            model: User,
-            key: 'uuid'
-        }
-    }
+    // userId: {
+    //     type: DataTypes.UUID,
+    //     references: {
+    //         model: User,
+    //         key: 'uuid'
+    //     }
+    // }
 })
 
 Contact.belongsTo(User)
