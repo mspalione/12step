@@ -23,6 +23,10 @@ const Contact = db.sequelize.define('Contact', {
     address: {
         type: DataTypes.STRING
     },
+    userName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     userId: {
         type: DataTypes.UUID,
         references: {

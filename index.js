@@ -22,7 +22,7 @@ app.use('/calendar', cal)
 app.use('/', router)
 
 database.initialize()
-seed.seed()
+//seed.seed()
     
 app.listen(3000, () => {
     console.log('listening on port 3000')

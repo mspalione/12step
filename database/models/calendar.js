@@ -26,6 +26,10 @@ const Calendar = db.sequelize.define('Calendar', {
     contactLastName: {
         type: DataTypes.STRING
     },
+    userName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     contactId: {
         type: DataTypes.UUID,
         references: {
