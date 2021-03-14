@@ -26,8 +26,8 @@ const User = require('../database/models/user.js')
  * @returns {Error}  default - Unexpected error
  */
  router.get('/:id', (req, res) => {
-    User.findOne({ where: { id } }).then(users => {
-        return res.json(users)
+    User.findOne({ where: { id } }).then(user => {
+        return res.json(user)
     })
 })
 
@@ -40,12 +40,7 @@ const User = require('../database/models/user.js')
  * @returns {Error}  default - Unexpected error
  */
  router.post('/', (req, res) => {
-    const newUser = User.create({
-    //     firstName: "Melissa",
-    // lastName: "S",
-    // recoveryEmail: "recover@email.com",
-    // userName: "melS",
-    // password: "thisismypassword"
+    User.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         recoveryEmail: req.body.recoveryEmail,

@@ -41,16 +41,16 @@ const Contact = require('../database/models/contact.js')
  * @returns {Error}  default - Unexpected error
  */
  router.post('/', (req, res) => {
-    const contact = Contact.findOne({
+    Contact.findOne({
         where: {firstName: req.body.contactFirstName}
     }).then(contact => {
-        const newCalendar = Calendar.create({
+        Calendar.create({
             eventTitle: req.body.eventTitle,
             dateAndTime: req.body.dateAndTime,
             eventSummary: req.body.eventSummary,
             contactFirstName: req.body.contactFirstName,
             contactLastName: req.body.contactLastName,
-            contact: contact
+            contactId: contact.uuid
     }).then((calendar) => {
         return res.json( calendar )
     })  

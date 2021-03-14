@@ -5,14 +5,8 @@ const User = db.sequelize.define('User', {
     uuid: {
         type: DataTypes.UUID,
         unique: true,
-        defaultValue: Sequelize.UUIDV4,
-        //primaryKey: true
+        defaultValue: Sequelize.UUIDV4
     },
-    // id: {
-    //     type: DataTypes.INTEGER,
-    //     unique: true,
-    //     autoIncrement: true
-    // },
     firstName: {
         type: DataTypes.STRING,
         allowNull: false

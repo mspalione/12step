@@ -7,14 +7,8 @@ const Calendar = db.sequelize.define('Calendar', {
     uuid: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
-        unique: true,
-        //primaryKey: true
+        unique: true
     },
-    // id: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //     autoIncrement: true
-    // },
     eventTitle: {
         type: DataTypes.STRING,
         allowNull: false
@@ -32,24 +26,21 @@ const Calendar = db.sequelize.define('Calendar', {
     contactLastName: {
         type: DataTypes.STRING
     },
-    // contactId: {
-    //     type: DataTypes.UUID,
-    //     references: {
-    //         model: Contact,
-    //         key: 'uuid'
-    //     }
-    // },
-    // userId: {
-    //     type: DataTypes.UUID,
-    //     references: {
-    //         model: User,
-    //         key: 'uuid'
-    //     }
-    // }
+    contactId: {
+        type: DataTypes.UUID,
+        references: {
+            model: Contact,
+            key: 'uuid'
+        }
+    },
+    userId: {
+        type: DataTypes.UUID,
+        references: {
+            model: User,
+            key: 'uuid'
+        }
+    }
 })
-
-Calendar.belongsTo(User)
-Calendar.belongsTo(Contact)
 
 db.models.Calendar
 

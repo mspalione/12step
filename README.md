@@ -22,3 +22,11 @@ https://www.npmjs.com/package/nodemon
 - Utilize Sequelize with Sqlite 
 - Include unit tests for each end point
 - Build out api following CRUD operations
+
+## SQLite
+While not necessary to see project effectiveness, a DB Browser for SQLite to see db contents can be downloaded here https://sqlitebrowser.org/
+
+- The User model is used as a foreign key in the Calendar and Contact models to limit user access to their own calendar and contacts. 
+- The Contact model is used as a foreign key in the Calendar model as an optional field to tie a calendar event to a specific contact.
+- All three db tables have been seeded with data. This runs automatically once the app is started.
+

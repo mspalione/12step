@@ -10,7 +10,7 @@ const Contact = require('../database/models/contact.js')
  * @returns {Error}  default - Unexpected error
  */
  router.get('/', (req, res) => {
-    User.findAll().then((contacts) => {
+    Contact.findAll().then((contacts) => {
         return res.json(contacts)
     })
 })

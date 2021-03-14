@@ -4,6 +4,7 @@ const user = require('./routes/user')
 const contact = require('./routes/contact')
 const cal = require('./routes/calendar')
 const database = require('./database')
+const seed = require('./database/seed')
 const app = express()
 
 app.disable('x-powered-by')
@@ -20,8 +21,8 @@ app.use('/contacts', contact)
 app.use('/calendar', cal)
 app.use('/', router)
 
-
 database.initialize()
+seed.seed()
     
 app.listen(3000, () => {
     console.log('listening on port 3000')

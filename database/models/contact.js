@@ -6,21 +6,13 @@ const Contact = db.sequelize.define('Contact', {
     uuid: {
         type: DataTypes.UUID,
         unique: true,
-        defaultValue: Sequelize.UUIDV4,
-        //primaryKey: true
+        defaultValue: Sequelize.UUIDV4
     },
-    // id: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //     autoIncrement: true
-    // },
     firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
     lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
     phone: {
         type: DataTypes.INTEGER 
@@ -31,16 +23,14 @@ const Contact = db.sequelize.define('Contact', {
     address: {
         type: DataTypes.STRING
     },
-    // userId: {
-    //     type: DataTypes.UUID,
-    //     references: {
-    //         model: User,
-    //         key: 'uuid'
-    //     }
-    // }
+    userId: {
+        type: DataTypes.UUID,
+        references: {
+            model: User,
+            key: 'uuid'
+        }
+    }
 })
-
-Contact.belongsTo(User)
 
 db.models.Contact
 
