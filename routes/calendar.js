@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const Calendar = require('../database/models/calendar.js')
-const Contact = require('../database/models/contact.js')
 const User = require('../database/models/user.js')
+const validate = require('./validations/calendarValidation')
 
 //READ
 
@@ -74,26 +74,8 @@ const User = require('../database/models/user.js')
  */
  router.post('/', async (req, res) => {
      try {
-
-         const contact = await Contact.findOne({ where: { firstName: req.body.contactFirstName } })
-         const user = await User.findOne({ where: { userName: req.body.userName } })
-        
-         if(!user) return res.status(400).json('No user found. Calendar event not created.')
-        
-         const calEvent = {
-            eventTitle: req.body.eventTitle,
-            dateAndTime: req.body.dateAndTime,
-            eventSummary: req.body.eventSummary,
-            contactFirstName: req.body.contactFirstName,
-            contactLastName: req.body.contactLastName,
-            userName: req.body.userName,
-            userId: user.uuid
-         }
-
-         if(contact) calEvent.contactId = contact.uuid
-
-         const cal = await Calendar.create(calEvent)
-    
+        const validEvent = await validate.create(req.body)
+        const cal = await Calendar.create(validEvent)
         return res.json( cal )  
      } catch (error) {
          res.status(400).json(`There was an error creating this calendar event: ${error}`)
@@ -114,7 +96,7 @@ const User = require('../database/models/user.js')
  router.put('/:eventId', async (req, res) => {
     try {
        const event = await Calendar.findOne({ where: { id: req.params.eventId } })
-       if(!event) return res.status(400).json('No such calendar event found.')
+       if(!event) throw 'No such calendar event found.'
 
        const cal = await event.update({
            eventTitle: req.body.eventTitle ? req.body.eventTitle : event.eventTitle,
