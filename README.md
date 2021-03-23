@@ -28,5 +28,7 @@ While not necessary to see project effectiveness, a DB Browser for SQLite to see
 
 - The User model is used as a foreign key in the Calendar and Contact models to limit user access to their own calendar and contacts. 
 - The Contact model is used as a foreign key in the Calendar model as an optional field to tie a calendar event to a specific contact.
-- All three db tables have been seeded with data. This runs automatically once the app is started.
+- All three db tables have been seeded with data. Ensure the seed.seed() method in the entrypoint index.js file is not commented out before running to allow seed to run automatically once the app is started.
 
+## Testing
+- verify the userId and the contactUuid for your sqlite db before running calendar test for 'when body contains event title, date and time'

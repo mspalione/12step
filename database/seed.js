@@ -49,7 +49,7 @@ const setSeed = {
         await createContact("Mom", null, "mwgranger@email.com", "123 Granger St", "+44 7911 123456", hermione.uuid, hermione.userName)
         await createContact("Dad", null, "wendellgranger@email.com", "123 Granger St", "+44 7911 123456", hermione.uuid, hermione.userName)
         await createContact("Ronald", "Weasley", "bestkeeper@email.com", "The Burrow", "+44 7911 654321", hermione.uuid, hermione.userName)
-        await createContact("Ronald", "Weasley", "bestkeeper@email.com", "The Burrow", "+44 7911 654321", harry.uuid, harry.userName)
+        await createContact("Ron", "Weasley", "bestkeeper@email.com", "The Burrow", "+44 7911 654321", harry.uuid, harry.userName)
         await createContact("Harry", "Potter", "longlivehedwig@email.com", "4 Privet Drive", "+44 7911 432165", hermione.uuid, hermione.userName)
         await createContact("Harry", "Potter", "longlivehedwig@email.com", "4 Privet Drive", "+44 7911 432165", ron.uuid, ron.userName)
         await createContact("Hermione", "Granger", "hgranger@email.com", "123 Granger St", "+44 7911 123456", ron.uuid, ron.userName)
