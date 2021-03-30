@@ -14,7 +14,7 @@
     "mocha": "*"
   },
   "scripts": {
-    "test": "mocha **/validations/**/test.js"
+    "test": "mocha **/validations/**.test.js"
   },
   "repository": {
     "type": "git",

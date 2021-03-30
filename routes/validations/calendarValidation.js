@@ -1,6 +1,5 @@
 const Contact = require('../../database/models/contact.js')
 const User = require('../../database/models/user.js')
-const Calendar = require('../../database/models/calendar.js')
 
 create = ( body, userId, contactUuid, contactFirstName, contactLastName ) => {
     let errors = ''

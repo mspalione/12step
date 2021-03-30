@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Contact = require('../database/models/contact.js')
 const User = require('../database/models/user.js')
+const validate = require('./validations/contactValidation')
 
 //READ
 
@@ -74,17 +75,7 @@ const User = require('../database/models/user.js')
  */
  router.post('/', async (req, res) => {
      try {
-        const user = await User.findOne({ where: { userName: req.body.userName } })
-
-        const contact = await Contact.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            address: req.body.address,
-            phone: req.body.phone,
-            userName: req.body.userName,
-            userId: user.uuid
-        })
+        const contact = await validate.create(req.body)
 
         return res.json( contact )
      } catch (error) {
@@ -108,13 +99,7 @@ const User = require('../database/models/user.js')
        const contact = await Contact.findOne({ where: { id: req.params.id } })
        if(!contact) return res.status(400).json('No such contact found.')
         
-       const updatedContact = await contact.update({
-           firstName: req.body.firstName ? req.body.firstName : contact.firstName,
-           lastName: req.body.lastName ? req.body.lastName : contact.lastName,
-           email: req.body.email ? req.body.email : contact.email,
-           address: req.body.address ? req.body.address : contact.address,
-           phone: req.body.phone ? req.body.phone : contact.phone
-       })
+       const updatedContact = validate.update(req.body, contact)
 
        return res.json( updatedContact )
     } catch (error) {
