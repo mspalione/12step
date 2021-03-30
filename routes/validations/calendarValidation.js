@@ -3,23 +3,25 @@ const User = require('../../database/models/user.js')
 const Calendar = require('../../database/models/calendar.js')
 
 create = ( body, userId, contactUuid, contactFirstName, contactLastName ) => {
-    const errors = []
+    let errors = ''
     const cal = {}
     let missingValues = false
 
     if (!body.eventTitle) {
-        errors.push('Event title is required')
+        errors += 'Event title is required. '
         missingValues = true
     }
 
     if (!body.dateAndTime) {
-        errors.push('Date and Time is required')
+        errors += 'Date and Time is required. '
         missingValues = true
     }
 
     if (missingValues === true) {
-        errors.push('Please enter the missing value(s) and try again.')
-        throw errors
+        errors += 'Please enter the missing value(s) and try again.'
+        let err = {}
+        err.message = errors
+        throw err
     }
     
     cal.eventTitle = body.eventTitle
@@ -40,10 +42,14 @@ create = ( body, userId, contactUuid, contactFirstName, contactLastName ) => {
 }
 
 findUser = async userName => {
-    if (!userName) throw 'Username is required'
+    let err = {}
+    if (!userName) {
+        err.message = 'Username is required'
+        throw err
+    }
 
     let user = await User.findOne({ where: { userName } })
-    if (!user) throw 'No user found by that username. Calendar event not created.'
+    if (!user) throw err.message = 'No user found by that username. Calendar event not created.'
 
     return user
 }

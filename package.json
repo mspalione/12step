@@ -10,7 +10,8 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "mocha": "^8.3.2"
+    "chai": "*",
+    "mocha": "*"
   },
   "scripts": {
     "test": "mocha **/validations/**/test.js"
