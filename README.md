@@ -8,6 +8,7 @@ A simple app to store contacts and schedule meetings.
 https://www.npmjs.com/package/nodemon
 4. Make requests to http://localhost:3000
 5. If you need to run the app locally more than once, or make a change to the code and run again manually or via nodemon, comment out the call to seed the db on index line 23.
+6. If the app gets run more than once on your computer, delete all the data inside the database.sqlite file, and run the app to seed the db fresh.
 
 ## To run Swagger UI for the API
 - Run `node swagger.js` or `nodemon swagger.js`
