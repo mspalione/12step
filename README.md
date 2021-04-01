@@ -33,6 +33,7 @@ While not necessary to see project effectiveness, a DB Browser for SQLite to see
 - All three db tables have been seeded with data. Ensure the seed.seed() method in the entrypoint index.js file is not commented out before running to allow seed to run automatically once the app is started.
 
 ## Testing
+- Be sure to run the app before testing so the db is seeded.
 - Testing utilizing chai running on mocha. 
 - Run the tests by typing `npm run test` in the terminal.
 - There are some base objects created for use with the tests.
