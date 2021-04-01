@@ -7,6 +7,7 @@ A simple app to store contacts and schedule meetings.
 3. Run `node ./` or install nodemon with `npm install -g nodemon` and then run `nodemon` in the terminal 
 https://www.npmjs.com/package/nodemon
 4. Make requests to http://localhost:3000
+5. If you need to run the app locally more than once, or make a change to the code and run again manually or via nodemon, comment out the call to seed the db on index line 23.
 
 ## To run Swagger UI for the API
 - Run `node swagger.js` or `nodemon swagger.js`
@@ -31,4 +32,9 @@ While not necessary to see project effectiveness, a DB Browser for SQLite to see
 - All three db tables have been seeded with data. Ensure the seed.seed() method in the entrypoint index.js file is not commented out before running to allow seed to run automatically once the app is started.
 
 ## Testing
-- verify the userId and the contactUuid for your sqlite db before running calendar test for 'when body contains event title, date and time'
+- Testing utilizing chai running on mocha. 
+- Run the tests by typing `npm run test` in the terminal.
+- There are some base objects created for use with the tests.
+- /calendar has three tests. /contact and /user have two.
+- All tests are found in routes/validations/validation.test.js
+- Each endpoint has its own describe grouping.
