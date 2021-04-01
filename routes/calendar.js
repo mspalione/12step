@@ -76,13 +76,12 @@ const validate = require('./validations/calendarValidation')
      try {
         const user = await validate.findUser(req.body.userName)
         const contact = await validate.findContact(user, req.body.contactFirstName, req.body.contactLastName)
-        const validEvent = await validate.create(req.body, user.userId, contact.uuid, contact.firstName, contact.lastName)
+        const validEvent = await validate.create(req.body, user.uuid, contact.uuid, contact.firstName, contact.lastName)
         const cal = await Calendar.create(validEvent)
 
         return res.json( cal )  
      } catch (error) {
-         console.log(error)
-         res.status(400).json(`There was an error creating this calendar event: ${error}`)
+         res.status(400).json(`There was an error creating this calendar event: ${error.message}`)
      }
 })
 

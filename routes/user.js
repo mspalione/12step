@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../database/models/user.js')
+const validate = require('./validations/userValidation')
 
 //READ
 
@@ -50,17 +51,18 @@ const User = require('../database/models/user.js')
  */
  router.post('/', async (req, res) => {
      try {
-        const newUser = await User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            recoveryEmail: req.body.recoveryEmail,
-            userName: req.body.userName,
-            password: req.body.password
-        })
-
+        const user = validate.create(req.body)
+        const newUser = await User.create(user)
+        // {
+        //     firstName: req.body.firstName,
+        //     lastName: req.body.lastName,
+        //     recoveryEmail: req.body.recoveryEmail,
+        //     userName: req.body.userName,
+        //     password: req.body.password
+        // }
         return res.json( newUser )
      } catch (error) {
-        res.status(400).json(`There was an error creating this user: ${error}`)
+        res.status(400).json(`There was an error creating this user: ${error.message}`)
      }
 })
 

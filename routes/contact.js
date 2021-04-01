@@ -79,7 +79,7 @@ const validate = require('./validations/contactValidation')
 
         return res.json( contact )
      } catch (error) {
-        res.status(400).json(`There was an error creating this contact: ${error}`)
+        res.status(400).json(`There was an error creating this contact: ${error.message}`)
      }
 })
 
@@ -96,14 +96,26 @@ const validate = require('./validations/contactValidation')
  */
  router.put('/:id', async (req, res) => {
     try {
-       const contact = await Contact.findOne({ where: { id: req.params.id } })
-       if(!contact) return res.status(400).json('No such contact found.')
-        
-       const updatedContact = validate.update(req.body, contact)
+      const contact = await validate.findContact(req.params.id)
 
-       return res.json( updatedContact )
+      let body = req.body
+      const updatedContact = await contact.update({
+      firstName: body.firstName ? body.firstName : contact.firstName,
+      lastName: body.lastName ? body.lastName : contact.lastName,
+      email: body.email ? body.email : contact.email,
+      address: body.address ? body.address : contact.address,
+      phone: body.phone ? body.phone : contact.phone
+      })
+
+      if(!updatedContact) {
+         let err = {}
+         err.message = 'The contact was not updated'
+         throw err
+      }
+
+      return res.json( updatedContact )
     } catch (error) {
-       res.status(400).json(`There was an error updating this contact: ${error}`)
+       res.status(400).json(`There was an error updating this contact: ${error.message}`)
     }
 })
 

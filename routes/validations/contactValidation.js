@@ -1,18 +1,15 @@
 const Contact = require('../../database/models/contact.js')
 const User = require('../../database/models/user.js')
-let err = {}
 
 create = async ( body ) => {
     if(!body.userName) {
-        err.message = 'Cannot create a new contact. User name is required.'
-        throw err
+        return res.status(400).json('Cannot create a new contact. User name is required.')
     }
 
     const user = await User.findOne({ where: { userName: body.userName } })
 
     if(!user) {
-        err.message = 'No user found associated with provided username.'
-        throw err
+        return res.status(400).json('No user found associated with provided username.')
     }
 
     return await Contact.create({
@@ -26,21 +23,11 @@ create = async ( body ) => {
     })
 }
 
-update = async ( body, contact ) => {
-    const updatedContact = await contact.update({
-        firstName: body.firstName ? body.firstName : contact.firstName,
-        lastName: body.lastName ? body.lastName : contact.lastName,
-        email: body.email ? body.email : contact.email,
-        address: body.address ? body.address : contact.address,
-        phone: body.phone ? body.phone : contact.phone
-    })
+findContact = async id => {
+    const contact = await Contact.findOne({ where: { id } })
+    if(!contact) return res.status(400).json('No such contact found.')
 
-    if(!updatedContact) {
-        err.message = 'The contact was not updated'
-        throw err
-    }
-
-    return updatedContact
+    return contact
 }
 
-module.exports = { create, update }
+module.exports = { create, findContact }

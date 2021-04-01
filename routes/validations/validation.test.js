@@ -1,5 +1,6 @@
 const calendar = require('./calendarValidation')
 const contact = require('./contactValidation')
+const user = require('./userValidation')
 let expect = require('chai').expect
 
 const harryPotter = async () => await calendar.findUser('roundglassesarecool')
@@ -50,34 +51,38 @@ const luna = {
 }
 
 describe('contact validation', () => {
-    describe('When a username is not provided', () => {
-        it('throws an error', () => {
-            expect(() => contact.create(luna)).to.throw()
-        })
-    })
-    
-    describe('When a user is not found with the provided username', () => {
-        it('throws an error', () => {
-            luna.userName = 'username'
-
-            expect(() => contact.create(luna)).to.throw()
-        })
-    })
-    
     describe('When a user is found with the provided username', () => {
-        it('returns contact object', () => {
+        it('returns contact object', async () => {
             luna.userName = 'roundglassesarecool'
-            const create = contact.create(luna)
+            const create = await contact.create(luna)
             expect(create).to.include(luna)
         })
     })
     
-    describe('When a contact is being updated', () => {
-        it('returns updated contact object', () => {
-            luna.phone = '+44 6532 123457'
-            const update = contact.update(luna)
-            expect(update).to.include(luna)
+    describe('When updating a contact', () => {
+        it('returns the contact object to update', async () => {
+            const contactToUpdate = await contact.findContact(5)
+            expect(contactToUpdate).to.include(contactRon)
         })
     })
 })
 
+describe('user validation', () => {
+    describe('When updating an user', () => {
+        it('returns the user object to update', async () => {
+            const userToUpdate = await user.findUser(1)
+            expect(userToUpdate).to.include(harryPotter)
+        })
+    })
+
+    describe('When creating a new user and any required field is missing', () => {
+        it('throws an error', () => {
+            expect(
+                user.create({
+                    userName: 'HarpiesGirl',
+                    firstName: 'Ginny',
+                    lastName: 'Weasley'
+                })).to.throw()
+        })
+    })
+})
