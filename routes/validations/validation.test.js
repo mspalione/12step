@@ -77,7 +77,7 @@ describe('user validation', () => {
 
     describe('When creating a new user and any required field is missing', () => {
         it('throws an error', () => {
-            expect(
+            expect(() =>
                 user.create({
                     userName: 'HarpiesGirl',
                     firstName: 'Ginny',

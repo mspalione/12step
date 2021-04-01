@@ -16,7 +16,10 @@ create = ( body, userId, contactUuid, contactFirstName, contactLastName ) => {
         missingValues = true
     }
 
-    if (missingValues === true) return res.status(400).json(errors)
+    if (missingValues === true) {
+        let err = { message: errors}
+        throw err         
+    }
     
     cal.eventTitle = body.eventTitle
     cal.dateAndTime = body.dateAndTime
@@ -39,8 +42,10 @@ findUser = async userName => {
     if (!userName) return res.status(400).json('Username is required')
 
     let user = await User.findOne({ where: { userName } })
-    if (!user) return res.status(400).json('No user found by that username. Calendar event not created.')
-
+    if (!user) {
+        const err = { message: 'No user found by that username. Calendar event not created.' }
+        throw err
+    }
     return user
 }
 
@@ -51,12 +56,13 @@ findContact = async ( user, contactFirstName, contactLastName ) => {
         if (contactFirstName) contactName.firstName = contactFirstName
         if (contactLastName) contactName.lastName = contactLastName
 
-        const contact = contactFirstName && contactLastName 
-            ? await Contact.findOne({ where: contactName }) 
-            : await Contact.findAll({ where: contactName })
+        const contact = await Contact.findAll({ where: contactName })
 
         if (!contact) return
-        if (contact.length > 1) throw `You have several contacts by that name. Please specify first and last name.`
+        if (contact.length > 1) {
+            const err = { message: 'You have several contacts by that name. Please specify first and last name.' }
+            throw err
+        }
 
         return contact
     }

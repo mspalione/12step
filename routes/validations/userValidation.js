@@ -31,7 +31,11 @@ create = body => {
         errors = true
     }
 
-    if(errors) return res.status(400).json(message)
+    if(errors) {
+        const err = {}
+        err.message = message    
+        throw err
+    }
 
     return {
         firstName: body.firstName,
@@ -44,8 +48,11 @@ create = body => {
 
 findUser = async id => {
     const user = await User.findOne({ where: { id } })
-    if(!user) return res.status(400).json('No such user found.')
-
+    if(!user) {
+        err.message = 'No user found.'
+        throw err
+    }
+    
     return user
 }
 

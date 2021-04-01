@@ -1,5 +1,4 @@
 const express = require('express')
-const router = require('./routes')
 const user = require('./routes/user')
 const contact = require('./routes/contact')
 const cal = require('./routes/calendar')
@@ -19,7 +18,6 @@ app.use((req, res, next) => {
 app.use('/users', user)
 app.use('/contacts', contact)
 app.use('/calendar', cal)
-app.use('/', router)
 
 database.initialize()
 //seed.seed()
